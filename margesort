@@ -1,0 +1,197 @@
+#include<stdio.h>
+/*
+// INSERTON SORT  function
+void Insertion_sort(int a[],int n)
+{  int  temp, x; 
+    for (int i = 1; i < n; i++) { 
+        temp= a[i]; 
+        x= i - 1; 
+      while (x >= 0 && a[x] > temp) 
+      { 
+            a[x + 1] = a[x]; 
+           x--;
+     } 
+     a[x+ 1] = temp; 
+    } 
+}
+
+
+
+
+
+// merge sort  function
+void merge(int a[], int left, int x, int right) 
+{ 
+    
+    int n1 = x - left + 1; 
+    int n2 = right - x; 
+    int L[n1], R[n2]; 
+  
+    
+    for (int i = 0; i < n1; i++) 
+        L[i] = a[left + i]; 
+    for (int j = 0; j < n2; j++) 
+        R[j] = a[x + 1 + j]; 
+  
+    
+   int  i = 0,j=0,k=left;
+   
+    while (i < n1 && j < n2) { 
+        if (L[i] <= R[j]) { 
+            a[k] = L[i]; 
+            i++; 
+        } 
+        else { 
+            a[k] = R[j]; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+  // add elements left in the first interval
+    while ( i < n1) { 
+        a[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  // add elements rignt in the second interval 
+    
+    while ( j < n2) { 
+        a[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+  
+//start and end are the starting and ending index of current interval of A
+
+void merge_sort(int a[], int left, int right) 
+{ 
+    if (left < right) { 
+        
+        int x = left + (right - left) / 2; 
+       
+       //
+       
+        merge_sort(a, left, x); 
+        merge_sort(a, x + 1, right); 
+      // Merge element in array
+        merge(a, left, x, right); 
+    } 
+} 
+  
+
+
+
+ 
+ 
+  // quick_sort  function
+
+int divide (int a[], int l, int h) 
+{ 
+    int pivot = a[h];   
+    int x = (l - 1);  
+  
+    for (int j = l; j <= h- 1; j++) 
+    { 
+        
+        if (a[j] < pivot) 
+        { 
+                x++;    
+              int temp=a[x];
+              a[x]=a[j];
+              a[j]=temp;
+        } 
+    } 
+   
+    int temp=a[x+1];
+        a[x+1]=a[h];
+          a[h]=temp;
+    return (x + 1); 
+} 
+  
+
+void quick_sort(int a[], int l, int h) 
+{ 
+    if (l < h) 
+    { 
+        int j =divide(a, l, h); 
+        quick_sort(a, l, j - 1); 
+        quick_sort(a, j+ 1, h); 
+    } 
+} */
+
+
+// heap sort function
+void heapify(int a[], int size, int i)  
+{  
+    int high = i;    
+    int left = 2*i + 1;    
+    int right = 2*i + 2;    
+    
+    if (left < size && a[left] >a[high])  
+    high = left;  
+    
+    if (right < size && a[right] > a[high])  
+    high = right;  
+    
+    if (high != i)  
+    {  
+    int temp = a[i];  
+        a[i]= a[high];   
+        a[high] = temp;  
+    heapify(a, size, high);  
+    }  
+}  
+  
+void heapSort(int a[], int size)  
+{  
+        int i;  
+        for (i = size / 2 - 1; i >= 0; i--)  
+        heapify(a, size, i);  
+        for (i=size-1; i>=0; i--)  
+        {  
+        int temp = a[0];  
+            a[0]= a[i];   
+            a[i] = temp;  
+        heapify(a, i, 0);  
+        }  
+}  
+
+
+// main function 
+int main()
+{
+    int n;
+    printf("Enter Number For Array length :  ");
+    scanf("%d",&n);
+    
+    int a[n];
+    printf("Enter Array Element : \n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    printf("Array Elment :  ");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d  ",a[i]);
+    }
+    printf("\n");
+   
+
+    // Insertion_sort(a ,n);
+      
+    //merge_sort(a,0,n-1);
+    //quick_sort(a, 0, n-1); 
+    heapSort(a, n);
+
+    printf("After Sorted Array Elment :  ");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d  ",a[i]);
+    }
+    printf("\n");
+
+    return 0; 
+}
